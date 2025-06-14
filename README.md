@@ -31,5 +31,5 @@ Welcome! This is my personal collection of study notes, assignments, and various
 ## ⏳ This repository is under development and will be updated regularly. At the moment, some sections may be empty ⏳
 
 <div align="center">
-  <img src="https://media.tenor.com/42bcTn0iuVgAAAAj/under-construction-pikachu.gif" width="80%">
+  <img src="https://media.tenor.com/42bcTn0iuVgAAAAj/under-construction-pikachu.gif" width="65%">
 </div>
