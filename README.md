@@ -8,7 +8,7 @@ Welcome! This is my personal collection of study notes, assignments, and various
 
 | Section | Description |
 |--------|-------------|
-| [🐍 Python](./python/README.md) | Core Python concepts |
+| [🐍 Python](./PYTHON/README.md) | Core Python concepts |
 | [🌿 Git](./git/README.md) | Git basics, commands, workflows |
 | [🗃️ SQL](./sql/README.md) | SQL queries, relational databases, practice |
 | [🧠 Machine Learning](./ml/README.md) | ML theory, models |
