@@ -10,8 +10,8 @@ This section contains my study notes, exercises, and projects related to Python.
 
 | Folder | Description |
 |--------|-------------|
-| [Folder](./test/) | Jupyter notebooks with code examples and practice |
-| [File](./test.ipynb)  | Assignments and their solutions |
+| text | test |
+| [File](./test.ipynb)  | Jupyter notebooks |
 
 ---
 

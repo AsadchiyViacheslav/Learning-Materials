@@ -8,12 +8,12 @@ Welcome! This is my personal collection of study notes, assignments, and various
 
 | Section | Description |
 |--------|-------------|
-| [🐍 Python](./PYTHON/README.md) | Core Python concepts |
-| [🌿 Git](./git/README.md) | Git basics, commands, workflows |
-| [🗃️ SQL](./sql/README.md) | SQL queries, relational databases, practice |
-| [🧠 Machine Learning](./ml/README.md) | ML theory, models |
-| [🧬 Deep Learning](./dl/README.md) | Neural networks, training & tuning |
-| [🗣️ NLP](./nlp/README.md) | Text processing, language models |
+| [🐍 Python](./PYTHON/) | Core Python concepts |
+| [🌿 Git](./GIT/) | Git basics, commands, workflows |
+| [🗃️ SQL](./SQL/) | SQL queries, relational databases, practice |
+| [🧠 Machine Learning](./ML/) | ML theory, models |
+| [🧬 Deep Learning](./DL/) | Neural networks, training & tuning |
+| [🗣️ NLP](./NLP/) | Text processing, language models |
 
 ---
 
@@ -29,3 +29,7 @@ Welcome! This is my personal collection of study notes, assignments, and various
 
 
 ## ⏳ This repository is under development and will be updated regularly. At the moment, some sections may be empty ⏳
+
+<div align="center">
+  <img src="https://media.tenor.com/42bcTn0iuVgAAAAj/under-construction-pikachu.gif" width="80%">
+</div>
