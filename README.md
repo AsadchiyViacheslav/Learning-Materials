@@ -1,34 +1,32 @@
-# 🧠 My Learning Repository
+# 🧠 Мой учебный репозиторий
 
-Welcome! This is my personal collection of study notes, assignments, and various programming-related material.
-
----
-
-## 📂 Repository Structure
-
-| Section | Description |
-|--------|-------------|
-| [🐍 Python](./PYTHON/) | Core Python concepts |
-| [🌿 Git](./GIT/) | Git basics, commands, workflows |
-| [🗃️ SQL](./SQL/) | SQL queries, relational databases, practice |
-| [🧠 Machine Learning](./ML/) | ML theory, models |
-| [🧬 Deep Learning](./DL/) | Neural networks, training & tuning |
-| [🗣️ NLP](./NLP/) | Text processing, language models |
+Добро пожаловать! Это моя личная коллекция учебных заметок, заданий и различных материалов, связанных с программированием.
 
 ---
 
-## 🎯 Goals
+## 📂 Структура репозитория
 
-- Organize all my learning materials
-- Deepen understanding of key subjects
-- Create a digital learning portfolio
-- Make revision and tracking easier
+| Раздел | Описание |
+|--------|----------|
+| [🐍 Python](./PYTHON/) | Основы языка Python |
+| [🌿 Git](./GIT/) | Основы Git, команды, рабочие процессы |
+| [🗃️ SQL](./SQL/) | SQL-запросы, базы данных, практика |
+| [🧠 Машинное обучение](./ML/) | Теория машинного обучения, модели |
+| [🧬 Глубокое обучение](./DL/) | Нейронные сети, обучение и настройка |
+| [🗣️ Обработка естественного языка (NLP)](./NLP/) | Работа с текстами, языковые модели |
 
 ---
 
+## 🎯 Цели
 
+- Организовать все учебные материалы
+- Углубить понимание ключевых тем
+- Создать цифровое портфолио для обучения
+- Упростить повторение и отслеживание прогресса
 
-## ⏳ This repository is under development and will be updated regularly. At the moment, some sections may be empty ⏳
+---
+
+## ⏳ Репозиторий в разработке и будет регулярно обновляться. В данный момент некоторые разделы могут быть пустыми ⏳
 
 <div align="center">
   <img src="https://media.tenor.com/42bcTn0iuVgAAAAj/under-construction-pikachu.gif" width="65%">
