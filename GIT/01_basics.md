@@ -113,22 +113,22 @@ git cat-file -p <hash>
 
 В случае изменения имени файла git считает что мы удалили старый файл и создали новый.
 ```
-mv old_name.txt new_name.txt
-git add new_name.txt
-git rm old_name.txt
+mv <old_name.txt> <new_name.txt>
+git add <new_name.txt>
+git rm <old_name.txt>
 ```
 Поэтому существует команда git mv
 ```
-git mv old_name.txt new_name.txt
+git mv <old_name.txt> <new_name.txt>
 ```
 
 Для восстановления файла из последнего коммита (HEAD)
 ```
-git restore file.txt
+git restore <file.txt>
 ```
 
 Чтобы восстановить стейдженные изменения (из индекса)
 ```
-git restore --staged file.txt
+git restore --staged <file.txt>
 ```
 Это удалит файл из индекса, но оставит изменения в рабочей директории (удобно при ошибочном git add).
