@@ -25,6 +25,6 @@
 ## 💡 Ресурсы
 
 - [Книга Pro Git by Scott Chacon and Ben Straub](https://git-scm.com/book/ru/v2)
-- [Git курс от JavaScript.ru](https://www.youtube.com/playlist?list=PLDyvV36pndZFHXjXuwA_NywNrVQO0aQqb)
+- [Git курс от Leela Web Dev](https://www.youtube.com/playlist?list=PL_euSNU_eLbegnt7aR8I1gXfLhKZbxnYX)
 - [Документация Git](https://git-scm.com/docs)
 
