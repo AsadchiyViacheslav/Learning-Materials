@@ -194,3 +194,9 @@ docker image prune -a
 ```bash
 docker system prune -a
 ```
+
+Также у комманд как pause, ps и так далее есть множество флагов, например:
+```
+docker ps -q -f status=restarting
+docker stop $(docker ps -q)
+```
