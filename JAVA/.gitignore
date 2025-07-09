@@ -1,0 +1,21 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Java class files
+*.class
+
+# Maven / Gradle output
+target/
+out/
+build/
+
+# Logs
+*.log
+
+# IntelliJ working files
+*.ipr
+
+# Environment and package files
+.env
