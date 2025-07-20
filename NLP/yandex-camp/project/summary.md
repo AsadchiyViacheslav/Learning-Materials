@@ -1,13 +1,25 @@
 # SemEval2025 Task - 8 
 
-## Основная идея
+## Solution
+
+### Основная идея
 
 Основная идея — существенно уменьшить табличный контекст, сначала выбрав релевантные столбцы, а затем использовать LLM для генерации ответа только на основе этих столбцов. Это решает проблему слишком больших таблиц, которые нельзя напрямую вставить в prompt.
 
 Схема: вопрос -> LLM -> столбцы -> LLM -> pandas code -> ответ
 
-## Column-Augmented Generation (CAG)
+### Column-Augmented Generation (CAG)
 Промпт вида
+```
+Given a table contains columns with names <list of column names>, I want to answer a question:
+<question>.
+
+Please select a few column names from the list <list of column names>, the values of which will
+help answer the question.
+
+Please provide a list of column names in the list format without any additional explanations.
+```
+
 ```
 Given a table contains columns with names <list of column names>, I want to answer a question:
 <question>.
@@ -20,7 +32,7 @@ Please provide a list of column names in the list format without any additional 
 
 Ответ LLM: `["column_1", "column_2", "column_3"]`
 
-## Генерация pandas code
+### Генерация pandas code
 
 ```
 Ты помощник по анализу данных. У тебя есть Pandas DataFrame с колонками:
@@ -37,7 +49,7 @@ Please provide a list of column names in the list format without any additional 
 | ❗ LLM может ошибаться в синтаксисе    | Использовать `try/except`, перегенерацию, self-refine |
 | ❗ Ответ может быть не в коде          | Жёстко требовать: “верни только `python` код”         |
 
-## Reasoning Prompting Techniques
+### Reasoning Prompting Techniques
 Чтобы повысить надёжность и точность, применяются несколько техник:
 
 - 📍 Chain-of-Thought (CoT)
@@ -58,4 +70,21 @@ Please provide a list of column names in the list format without any additional 
 | + CAG + CoT + Consistency(10) | **81.99%**    |
 | DeepSeek-R1-32B + CAG         | **83.52%**    |
 
+---
 
+## Basic solution - как поместить контекст 100 т. строк
+
+CAG +:
+
+-  **Ранжирование строк (row retrieval)**  
+Идея: как ты выбрал релевантные столбцы, теперь выбери   релевантные строки.   
+Алгоритмы:  
+Dense retrieval (например, с BGE, ColBERT)   
+BM25 (если ты хочешь быстро и по ключевым словам)  
+Hybrid retrieval (BGE + BM25)  
+
+- **LLM-assisted row filtering**  
+Промптируешь LLM: «вот названия колонок, вот вопрос — какие строки релевантны?»
+
+- **Pre-aggregation**  
+ Выполнить агрегацию средствами Pandas
