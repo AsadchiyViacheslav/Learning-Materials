@@ -9,6 +9,9 @@
 Схема: вопрос -> LLM -> столбцы -> LLM -> pandas code -> ответ
 
 ### Column-Augmented Generation (CAG)
+
+Структурированные представления каждого столбца (включая имя, тип, мин/макс значения и наиболее частые значения)
+
 Промпт вида
 ```
 Given a table contains columns with names <list of column names>, I want to answer a question:
@@ -35,19 +38,32 @@ Please provide a list of column names in the list format without any additional 
 ### Генерация pandas code
 
 ```
-Ты помощник по анализу данных. У тебя есть Pandas DataFrame с колонками:
-
-["name", "country", "age", "joined_date", "is_active"]
-
-Ответь на вопрос: "Сколько пользователей старше 65 лет из Германии?"
-
-Верни только Python-код на Pandas, который вернёт ответ (число).
+# Examples:
+# Example 1:
+# Question: <question>
+# Answer: <answer>
+# Example 2: . . .
+—–
+# Instructions:
+# Implement the following function in one line.
+# Answer with the function only with no additional explanations.
+# The function must return one of these types: bool, int, str, list[int], or list[str].
+# Formatting rules:
+# 1) Answer with the function only. No comments, no additional explanations.
+# 2) Your answer should start with: def answer
+# 3) The function should be implemented in one line
+# Your task: complete the following function in one line. It should give the answer to: {question}
+def answer(df: pd.DataFrame):
+df.columns = {list_columns}
+return
 ```
 
 | Проблема                              | Решение                                               |
 | ------------------------------------- | ----------------------------------------------------- |
 | ❗ LLM может ошибаться в синтаксисе    | Использовать `try/except`, перегенерацию, self-refine |
 | ❗ Ответ может быть не в коде          | Жёстко требовать: “верни только `python` код”         |
+
+ Если при выполнении возникала ошибка, применялся метод self-refine с передачей исключения в промпт.
 
 ### Reasoning Prompting Techniques
 Чтобы повысить надёжность и точность, применяются несколько техник:
@@ -71,6 +87,8 @@ Please provide a list of column names in the list format without any additional 
 | DeepSeek-R1-32B + CAG         | **83.52%**    |
 
 ---
+
+Кроме того, подходы к построению QA-систем на табличных данных могут быть дополнительно усилены за счёт использования графов знаний
 
 ## Basic solution - как поместить контекст 100 т. строк
 
