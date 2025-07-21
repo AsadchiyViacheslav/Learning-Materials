@@ -1,16 +1,31 @@
 # CAG
 
-## Metrics API
+## Metrics API   
 
-Llama base:
-Accuracy : 0.7700
-Precision: 0.8200
-Recall:    0.8425
-F1 Score:  0.8311
+### Llama   
+**base:**
+| Metric    | Value  |
+| --------- | ------ |
+| Accuracy  | 0.7700 |
+| Precision | 0.8200 |
+| Recall    | 0.8425 |
+| F1 Score  | 0.8311 |
+  
+  
+CoT:  
+| Metric    | Run 1  | Run 2  | Run 3  | Avg        |
+| --------- | ------ | ------ | ------ | ---------- |
+| Accuracy  | 0.8400 | 0.8000 | 0.8700 | **0.8367** |
+| Precision | 0.9012 | 0.8696 | 0.8961 | **0.8890** |
+| Recall    | 0.9241 | 0.9396 | 0.9517 | **0.9385** |
+| F1 Score  | 0.9125 | 0.9032 | 0.9231 | **0.9129** |
 
-Reasoning:
-=== Evaluation ===
-Accuracy : 0.8500
-Precision: 0.9012
-Recall:    0.9241
-F1 Score:  0.9125
+  
+CoT + Few-shot  
+| Metric    | Run 1  | Run 2  | Run 3  | Avg        |
+| --------- | ------ | ------ | ------ | ---------- |
+| Accuracy  | 0.8200 | 0.8700 | 0.8400 | **0.8433** |
+| Precision | 0.8824 | 0.8947 | 0.8774 | **0.8848** |
+| Recall    | 0.9643 | 0.9315 | 0.9444 | **0.9467** |
+| F1 Score  | 0.9215 | 0.9128 | 0.9097 | **0.9146** |
+ 
