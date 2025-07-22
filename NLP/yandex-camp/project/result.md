@@ -2,8 +2,6 @@
 
 ## Metrics API   
 
----
-
 ### Llama   
 **base:**
 | Metric    | Value  |
@@ -54,8 +52,6 @@
 
 ## Metrics local models with vLLM  
 
----
-
 ### DeepSeek-R1-Distill-Qwen-32B-quantized.w4a16
 
 **Base:**  
@@ -74,8 +70,6 @@
 | Recall    | 0.8981 |
 | F1 Score  | 0.8571 |
 
----
-
 # Code generation
 
 ## Metrics API  
@@ -85,5 +79,12 @@
 | Metric    | Value  |
 | --------- | ------ |
 | Accuracy 1 | 0.6650 |
-| Accuracy 2 | 0.7600 |
-| Accuracy 3 | 0.0000 |
+| Accuracy 2 | 0.7700 |
+| Accuracy 3 |   -    |
+
+
+**Llama + Qwen**
+
+| Metric    | Value  |
+| --------- | ------ |
+| Accuracy 1 | 0.6100 |
