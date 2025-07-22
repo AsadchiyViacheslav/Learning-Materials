@@ -35,10 +35,10 @@
 **base:**
 | Metric    | Run 1  | Run 2 |
 | --------- | ------ | ----- |
-| Accuracy  | 0.8700 | 0.9000 |
-| Precision | 0.9845 | 0.9650 |
-| Recall    | 0.9071 | 0.9262 |
-| F1 Score  | 0.9442 | 0.9452 | 
+| Accuracy  | 0.8700 | 0.8700 |
+| Precision | 0.9245 | 0.9050 |
+| Recall    | 0.9071 | 0.9062 |
+| F1 Score  | 0.9442 | 0.9152 | 
 
   
 **Few-shot** 
@@ -48,3 +48,17 @@
 | Precision | 0.9847 | 0.9714 | 0.9701 | **0.9754** |
 | Recall    | 0.8658 | 0.9315 | 0.8609 | **0.8861** |
 | F1 Score  | 0.9214 | 0.9510 | 0.9123 | **0.9282** |
+
+## Metrics Local
+
+# Code generation
+
+## Metrics API  
+
+**Llama**
+
+| Metric    | Value  |
+| --------- | ------ |
+| Accuracy 1 | 0.6650 |
+| Accuracy 2 | 0.0000 |
+| Accuracy 3 | 0.0000 |
