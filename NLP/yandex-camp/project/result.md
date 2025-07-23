@@ -78,10 +78,13 @@
 
 | Metric    | Value  |
 | --------- | ------ |
-| Accuracy 1 | 0.6650 |
-| Accuracy 2 | 0.7700 |
-| Accuracy 3 |   -    |
+| Accuracy 1 | 0.7600 |
+| Accuracy 2 + CoT |   0.7300    |
 
+**Llama without CAG**
+| Metric    | Value  |
+| --------- | ------ |
+| Accuracy 1 | 0.69 |
 
 **Llama + Qwen**
 
