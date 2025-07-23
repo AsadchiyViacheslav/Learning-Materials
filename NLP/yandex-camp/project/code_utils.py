@@ -19,6 +19,9 @@ from llm_backend import *
 
 
 class PandasCodeGeneration:
+    """
+    Класс для предсказания pandas кода по вопросу и его исполнение с валидацией, постпроцессингом, оценкой на train и создании сабмита.
+    """
     def __init__(self, llm_backend: Optional[LLMBackend] = None):
         load_dotenv()
         self.datasets, qa_df = load_datasets()
@@ -49,6 +52,9 @@ class PandasCodeGeneration:
     
 
     def forward(self, question: str, filtered_schema: str, dataset_name: str) -> str:
+        """
+        Генерирует pandas-код для заданного вопроса, схемы и имени датасета.
+        """
         try:
             prompt = self._construct_prompt(question, filtered_schema, dataset_name)
             response = self.llm.generate(prompt)
@@ -65,6 +71,9 @@ class PandasCodeGeneration:
     
         
     def execute_code(self, code: str, dataset_name: str, flag_submit: bool = False, use_lite: bool = False) -> Any:
+        """
+        Выполняет сгенерированный код на соответствующем датасете.
+        """
         try:
 
             if flag_submit and use_lite:
@@ -94,6 +103,9 @@ class PandasCodeGeneration:
     
     
     def _format_result(self, result: Any) -> Union[bool, str, int, float, List]:
+        """
+        Приводит результат выполнения к стандартизированному виду.
+        """
         if isinstance(result, (bool, int, float)):
             return result
         elif isinstance(result, str):
@@ -114,6 +126,9 @@ class PandasCodeGeneration:
     
     
     def _clean_value(self, value: Any) -> Any:
+        """
+        Удаляет лишние пробелы, приводит NaN к None и т.п.
+        """
         if pd.isna(value):
             return None
         elif isinstance(value, str):
@@ -186,6 +201,9 @@ Output ONLY the final result as a Pandas code on the last line
 
     
     def _parse_response(self, response: str) -> str:
+        """
+        Извлекает финальную строку кода из ответа LLM.
+        """
         try:
             content = response.strip()
             if not content:
@@ -210,6 +228,9 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def _validate_code(self, code: str, schema: str) -> bool:
+        """
+        Проверяет, безопасен ли сгенерированный код и соответствует ли схеме, все ли столбцы есть.
+        """
         try:
             if not code or not isinstance(code, str):
                 return False
@@ -246,6 +267,10 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def make_submit(self, column_generator=None):
+        """
+        Генерирует предсказания для всех вопросов тестовой выборки qa по сложной и простой базам знаний
+        и сохраняет их в файлы predictions.txt и predictions_lite.txt.
+        """
         size = len(self.test_df)
 
         random.seed(42)
@@ -291,6 +316,15 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def eval(self, size: int = None, log: bool = False, val: bool = False, column_generator=None):
+        """
+        Оценивает точность модели на тренировочных или валидационных данных.
+
+        Аргументы:
+            size (int): сколько примеров использовать
+            log (bool): логировать ли каждую итерацию
+            val (bool): использовать валидационную выборку или нет
+            column_generator: если задан, фильтрует схему
+        """
         if size is None:
             size = len(self.val_df) if val else len(self.train_df)
 
@@ -329,6 +363,9 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def _compare_answers(self, predicted: Any, true: Any) -> bool:
+        """
+        Сравнивает предсказанный и настоящий ответы.
+        """
         try:
             if predicted is None and true is None:
                 return True
@@ -373,6 +410,9 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def _parse_bool(self, value: Any) -> Optional[bool]:
+        """
+        Парсинг bool в нормальный формат
+        """
         if isinstance(value, (bool, np.bool_)):
             return bool(value)
         if isinstance(value, bool):
@@ -388,6 +428,9 @@ Output ONLY the final result as a Pandas code on the last line
     
     
     def _parse_list(self, value: Any) -> Optional[List]:
+        """
+        Парсинг списка в нормальный формат
+        """
         if isinstance(value, list):
             return value
 

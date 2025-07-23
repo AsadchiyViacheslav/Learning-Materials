@@ -18,6 +18,9 @@ from llm_backend import *
 
 
 class ColumnAwareGeneration:
+    """
+    Класс для предсказания нужных колонок таблицы по вопросу пользователя с использованием LLM.
+    """
     def __init__(self, llm_backend: Optional[LLMBackend] = None):
         load_dotenv()
         self.datasets, qa_df = load_datasets()
@@ -45,8 +48,10 @@ class ColumnAwareGeneration:
     def from_vllm(cls, **kwargs) -> 'ColumnAwareGeneration':
         return cls(VLLMBackend(**kwargs))
     
-    
     def build_few_shot_messages(self, question: str, schema: str) -> List[Dict[str, str]]:
+        """
+        Собирает примеры few-shot обучения в формате сообщений.
+        """
         num_examples = max(2, len(self.train_df) // 10)
         few_shot_df = self.train_df.sample(n=num_examples, random_state=random.randint(0, 9999)).reset_index(drop=True)
         examples = random.sample(list(few_shot_df.itertuples(index=False)), k=2)
@@ -65,20 +70,26 @@ class ColumnAwareGeneration:
 
         return messages
 
-
     def forward(self, question: str, schema: str) -> List[str]:
+        """
+        Делает прямой вызов LLM без few-shot примеров.
+        """
         prompt = self._construct_prompt(question, schema)
         response = self.llm.generate(prompt)
         return self._parse_response(response)
     
-    
     def few_shot_forward(self, question: str, schema: str) -> List[str]:
+        """
+        Делает вызов LLM с few-shot примерами.
+        """
         messages = self.build_few_shot_messages(question, schema)
         response = self.llm.generate(messages=messages)
         return self._parse_response(response)
     
-    
     def predict(self, question: str, schema: str) -> List[str]:
+        """
+        Возвращает JSON-строку с отфильтрованной схемой по предсказанным колонкам.
+        """
         try:
             schema_dict = json.loads(schema)
             schema_keys = set(schema_dict.keys())
@@ -98,7 +109,6 @@ class ColumnAwareGeneration:
         except Exception as e:
             print(f"Predict error: {e}")
             return schema
-        
         
     def _construct_prompt(self, question: str, schema: str) -> str:
         return f"""You are an expert data extraction assistant specialized in schema analysis. 
@@ -134,7 +144,9 @@ Output Format:
 """
 
     def _parse_response(self, response: str) -> List[str]:
-        
+        """
+        Парсит последний список колонок из ответа модели.
+        """
         result = "<no response>"
         
         try:
@@ -158,8 +170,10 @@ Output Format:
             print(f"Error parsing response: {e}\nRaw response: {response}")
             return []
 
-        
     def _fix_and_parse(self, lst: str) -> List[str]:
+        """
+        Чистит и парсит строку со списком колонок.
+        """
         try:
             if isinstance(lst, list):
                 result = lst
@@ -194,8 +208,15 @@ Output Format:
             print(f"_fix_and_parse failed: {e}, answer {lst} {type(lst)}")
             return []
     
-    
     def eval(self, size: int = None, log: bool = False, val: bool = False):
+        """
+        Оценивает качество предсказания колонок на train или val данных.
+
+        Аргументы:
+        - size (int | None): Сколько примеров использовать. Если None — берётся весь набор.
+        - log (bool): Выводить ли предсказания в консоль.
+        - val (bool): Использовать ли валидационную выборку вместо обучающей.
+        """
         if size is None:
             size = len(self.val_df) if val else len(self.train_df)
 
