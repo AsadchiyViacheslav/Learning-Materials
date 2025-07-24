@@ -102,3 +102,4 @@
 | LLlama + Llama without cag | 65.43 |
 | LLlama + Llama without cag and fsp | 14.94 |
 | DeepSeek-R1-Distill-Qwen-32B-quantized.w4a16 + Llama full| 68.58 |
+| Llama full + DeepSeek-R1-Distill-Qwen-32B-quantized.w4a16 | 45.79 |
