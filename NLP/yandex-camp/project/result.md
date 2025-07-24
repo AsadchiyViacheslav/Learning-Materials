@@ -91,3 +91,13 @@
 | Metric    | Value  |
 | --------- | ------ |
 | Accuracy 1 | 0.6100 |
+
+
+
+# Competition metrics
+
+| Model    | EM  |
+| --------- | ------ |
+| LLlama + Llama full | 69.5 |
+| LLlama + Llama without cag | 65.43 |
+| LLlama + Llama without cag and fsp | 14.94 |
