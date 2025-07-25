@@ -13,7 +13,7 @@
   
   
 **CoT:**  
-| Metric    | Avg        |
+| Metric    | Avg metric        |
 | --------- | ---------- |
 | Accuracy  | **0.8367** |
 | Precision | **0.8890** |
