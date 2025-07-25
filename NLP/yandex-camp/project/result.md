@@ -13,21 +13,21 @@
   
   
 **CoT:**  
-| Metric    | Run 1  | Run 2  | Run 3  | Avg        |
-| --------- | ------ | ------ | ------ | ---------- |
-| Accuracy  | 0.8400 | 0.8000 | 0.8700 | **0.8367** |
-| Precision | 0.9012 | 0.8696 | 0.8961 | **0.8890** |
-| Recall    | 0.9241 | 0.9396 | 0.9517 | **0.9385** |
-| F1 Score  | 0.9125 | 0.9032 | 0.9231 | **0.9129** |
+| Metric    | Avg        |
+| --------- | ---------- |
+| Accuracy  | **0.8367** |
+| Precision | **0.8890** |
+| Recall    | **0.9385** |
+| F1 Score  | **0.9129** |
 
   
 **CoT + Few-shot** 
-| Metric    | Run 1  | Run 2  | Run 3  | Avg        |
-| --------- | ------ | ------ | ------ | ---------- |
-| Accuracy  | 0.8200 | 0.8700 | 0.8400 | **0.8433** |
-| Precision | 0.8824 | 0.8947 | 0.8774 | **0.8848** |
-| Recall    | 0.9643 | 0.9315 | 0.9444 | **0.9467** |
-| F1 Score  | 0.9215 | 0.9128 | 0.9097 | **0.9146** |
+| Metric     | Avg        |
+| ---------  | ---------- |
+| Accuracy   | **0.8433** |
+| Precision  | **0.8848** |
+| Recall     | **0.9467** |
+| F1 Score   | **0.9146** |
 
 ---
 
@@ -103,3 +103,5 @@
 | LLlama + Llama without cag and fsp | 14.94 |
 | DeepSeek-R1-Distill-Qwen-32B-quantized.w4a16 + Llama full| 68.58 |
 | Llama full + DeepSeek-R1-Distill-Qwen-32B-quantized.w4a16 | 45.79 |
+| Llama full + Qwen/Qwen2.5-Coder-32B-Instruct | 73.37 |
+
