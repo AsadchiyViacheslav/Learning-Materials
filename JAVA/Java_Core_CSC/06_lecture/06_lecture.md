@@ -79,7 +79,7 @@ Set<E> наследуется от Collection<E>, значит все базов
 - Эффективен при быстром поиске и удалении.
 
 ```java
-Set<String> set = new HashSet<>();
+HashSet<String> set = new HashSet<>();
 set.add("Apple");
 set.add("Banana");
 set.add("Apple"); // дубликат не добавится
@@ -98,7 +98,7 @@ System.out.println(set);
 - Время операций O(1), чуть медленнее HashSet из-за дополнительной структуры.
 
 ```java
-Set<String> linkedSet = new LinkedHashSet<>();
+LinkedHashSet<String> linkedSet = new LinkedHashSet<>();
 linkedSet.add("Apple");
 linkedSet.add("Banana");
 linkedSet.add("Cherry");
@@ -117,7 +117,7 @@ System.out.println(linkedSet); // [Apple, Banana, Cherry] — порядок в�
 - Время операций O(log n) для add, remove, contains.
 
 ```java
-Set<Integer> treeSet = new TreeSet<>();
+TreeSet<Integer> treeSet = new TreeSet<>();
 treeSet.add(5);
 treeSet.add(1);
 treeSet.add(3);
@@ -143,7 +143,7 @@ System.out.println(treeSet); // [1, 3, 5] — автоматически сор�
 - Вставка/удаление в середине: O(n), т.к. элементы нужно сдвигать.
 
 ```java
-List<String> list = new ArrayList<>();
+ArrayList<String> list = new ArrayList<>();
 list.add("A");
 list.add("B");
 list.add(1, "C"); // вставка по индексу
@@ -159,7 +159,7 @@ System.out.println(list); // [A, C, B]
 - Добавление/удаление в начале или середине: O(1) если есть ссылка на узел.
 
 ```java
-List<Integer> list = new LinkedList<>();
+LinkedList<Integer> list = new LinkedList<>();
 list.add(10);
 list.add(20);
 list.addFirst(5); // метод LinkedList
@@ -230,7 +230,7 @@ System.out.println(stack);        // [1, 2]
 - Позволяет хранить дубликаты.
 
 ```java
-Queue<Integer> pq = new PriorityQueue<>();
+PriorityQueue<Integer> pq = new PriorityQueue<>();
 pq.add(5);
 pq.add(1);
 pq.add(10);
@@ -263,7 +263,7 @@ System.out.println(pq.poll()); // 10
 
 ```java
 // Как очередь
-Deque<String> deque = new ArrayDeque<>();
+ArrayDeque<String> deque = new ArrayDeque<>();
 deque.addLast("A");
 deque.addLast("B");
 deque.addLast("C");
@@ -358,7 +358,7 @@ for (String key : map.keySet()) {
 - Реализует интерфейсы NavigableMap и SortedMap.
 
 ```java
-Map<String, Integer> map = new TreeMap<>();
+TreeMap<String, Integer> map = new TreeMap<>();
 map.put("Charlie", 35);
 map.put("Alice", 25);
 map.put("Bob", 30);
