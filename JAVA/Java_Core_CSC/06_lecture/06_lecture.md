@@ -116,6 +116,15 @@ System.out.println(linkedSet); // [Apple, Banana, Cherry] — порядок в�
 - Не допускает null, если используется естественный порядок (NullPointerException).
 - Время операций O(log n) для add, remove, contains.
 
+```java
+Set<Integer> treeSet = new TreeSet<>();
+treeSet.add(5);
+treeSet.add(1);
+treeSet.add(3);
+treeSet.add(3); // дубликат не добавится
+
+System.out.println(treeSet); // [1, 3, 5] — автоматически сортируется
+```
 
 ### List<E>
 
