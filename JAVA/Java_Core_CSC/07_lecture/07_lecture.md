@@ -63,5 +63,5 @@ Comparator<Student> cmp2 = Comparator
         .comparing(Student::getAge, Comparator.nullsFirst(Comparator.naturalOrder()))
         .reversed();
 
-students.sort(cmp2)
+students.sort(cmp2);
 ```
