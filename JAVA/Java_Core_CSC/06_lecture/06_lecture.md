@@ -281,29 +281,112 @@ stack.push(3);
 System.out.println(stack.pop()); // 3
         System.out.println(stack.pop()); // 2
 ```
-### Map<E>
+### Map<K, V>
 
+`Map<K, V>` — это коллекция, в которой элементы хранятся как пары ключ-значение:
 
+- Ключи уникальны (Set<K>), значения могут дублироваться
+- Доступ к значению происходит по ключу, а не по индексу
+- Не наследуется от Collection<E> → отдельный интерфейс
 
+**Основные методы**
+
+| Метод                         | Описание                                    |
+| ----------------------------- | ------------------------------------------- |
+| `put(K key, V value)`         | Добавляет или обновляет значение по ключу   |
+| `get(Object key)`             | Возвращает значение по ключу, null если нет |
+| `remove(Object key)`          | Удаляет пару по ключу                       |
+| `containsKey(Object key)`     | Проверяет наличие ключа                     |
+| `containsValue(Object value)` | Проверяет наличие значения                  |
+| `keySet()`                    | Возвращает `Set<K>` всех ключей             |
+| `values()`                    | Возвращает `Collection<V>` всех значений    |
+| `entrySet()`                  | Возвращает `Set<Map.Entry<K,V>>` всех пар   |
+| `size()`                      | Количество элементов                        |
+| `clear()`                     | Очистка карты                               |
 
 ---
 
-####
+#### HashMap<K, V>
 
+Основные моменты
+- Хеш-таблица - быстрый доступ по ключу O(1) амортизированное.
+- Ключи уникальны, значения могут дублироваться.
+- Null разрешён: один null-ключ и любое количество null-значений.
+- Не потокобезопасна.
+- Порядок элементов не гарантирован.
 
+```java
+Map<String, Integer> map = new HashMap<>();
+map.put("Alice", 25);
+map.put("Bob", 30);
+map.put("Charlie", 35);
+
+System.out.println(map.get("Bob")); // 30
+```
 
 ---
 
-####
+#### LinkedHashMap<K, V>
 
+Основные моменты
+- Наследует HashMap.
+- Сохраняет порядок вставки элементов (или порядок доступа при использовании access-order).
+- Разрешает null ключ и null значения.
+- Не потокобезопасна.
+- Немного медленнее HashMap из-за хранения ссылок на предыдущий/следующий элемент.
 
+```java
+Map<String, Integer> map = new LinkedHashMap<>();
+map.put("Alice", 25);
+map.put("Bob", 30);
+map.put("Charlie", 35);
+
+for (String key : map.keySet()) {
+    System.out.println(key);
+}
+// Alice, Bob, Charlie — порядок вставки сохранён
+```
 
 ---
 
-####
+#### TreeMap<K, V>
 
+Основные моменты
+- Красно-чёрное дерево - элементы отсортированы по ключу.
+- Доступ к элементу, вставка и удаление O(log n).
+- Null ключ запрещён (кроме специального Comparator), null значения разрешены.
+- Реализует интерфейсы NavigableMap и SortedMap.
 
+```java
+Map<String, Integer> map = new TreeMap<>();
+map.put("Charlie", 35);
+map.put("Alice", 25);
+map.put("Bob", 30);
+
+for (Map.Entry<String, Integer> entry : map.entrySet()) {
+    System.out.println(entry.getKey() + ": " + entry.getValue());
+}
+// Output: Alice: 25, Bob: 30, Charlie: 35 — отсортировано по ключу
+```
 
 ---
 
-####
+#### Hashtable<K, V>
+
+Основные моменты
+- Старая реализация хеш-таблицы (до Java 1.2).
+- Потокобезопасна за счёт синхронизации всех методов.
+- Null ключ и null значения запрещены.
+- Медленнее HashMap из-за синхронизации.
+
+---
+
+| Устаревшая коллекция | Замена     |
+|----------------------|------------|
+| Enumeration          | Iterator   |
+| Vector               | ArrayList  |
+| Stack                | ArrayDeque |
+| Dictionary           | Map        |
+| Hashtable            | HashMap    |
+| LinkedList| ArrayList/ArrayDeque| 
+
