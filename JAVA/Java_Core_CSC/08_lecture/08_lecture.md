@@ -194,20 +194,20 @@ Stream<Integer> infinite = Stream.iterate(0, n -> n + 1);
 Эти методы не изменяют данные и возвращают новый Stream.
 
 
-```
+```java
 List<String> names = List.of("Alice", "Bob", "Charlie", "David");
 ```
 
 `filter(Predicate)`  
 Оставляет только элементы, удовлетворяющие условию.
-```
+```java
 names.stream()
 .filter(s -> s.startsWith("A"))
 .forEach(System.out::println); // Alice
 ```
 `map(Function)`  
 Преобразует элементы.
-```
+```java
 names.stream()
 .map(String::toUpperCase)
 .forEach(System.out::println); // ALICE, BOB...
@@ -215,7 +215,7 @@ names.stream()
 `flatMap(Function)`  
 Разворачивает вложенные потоки.
 
-```
+```java
 List<List<String>> nested = List.of(List.of("a", "b"), List.of("c", "d"));
 
 nested.stream()
@@ -224,14 +224,14 @@ nested.stream()
 ```
 `sorted(Comparator)`  
 Сортировка.
-```
+```java
 names.stream()
 .sorted()
 .forEach(System.out::println); // Alice, Bob, Charlie, David
 ```
 `distinct()`  
 Удаляет дубликаты.
-```
+```java
 List.of(1, 2, 2, 3, 3).stream()
 .distinct()
 .forEach(System.out::println); // 1, 2, 3
@@ -240,7 +240,7 @@ List.of(1, 2, 2, 3, 3).stream()
 `limit(n) и skip(n)`  
 limit(n) — первые n элементов.  
 skip(n) — пропустить первые n элементов.
-```
+```java
 Stream.iterate(1, n -> n + 1)
 .limit(5)
 .forEach(System.out::println); // 1 2 3 4 5
@@ -249,14 +249,14 @@ Stream.iterate(1, n -> n + 1)
 #### Конечные операции (terminal)
 
 `forEach`
-```
+```java
 names.stream().forEach(System.out::println);
 ```
 
 `collect`
 
 Собирает результат в коллекцию.
-```
+```java
 List<String> upper = names.stream()
 .map(String::toUpperCase)
 .toList();  // Java 16+
@@ -264,22 +264,22 @@ List<String> upper = names.stream()
 `reduce`
 
 Свертка — объединение элементов в одно значение.
-```
+```java
 int sum = List.of(1, 2, 3, 4).stream()
 .reduce(0, (a, b) -> a + b);
 System.out.println(sum); // 10
 ```
 `count`
-```
+```java
 long count = names.stream().count(); // 4
 ```
 `min / max`
-```
+```java
 Optional<String> min = names.stream().min(String::compareTo);
 System.out.println(min.get()); // Alice
 ```
 `anyMatch / allMatch / noneMatch`
-```
+```java
 boolean hasA = names.stream().anyMatch(s -> s.startsWith("A")); // true
 boolean allLong = names.stream().allMatch(s -> s.length() > 2); // true
 ```
