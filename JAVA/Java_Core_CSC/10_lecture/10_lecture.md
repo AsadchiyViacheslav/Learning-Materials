@@ -386,5 +386,71 @@ File[] bigFiles = home.listFiles(f2 -> f2.isFile() && f2.length() > 1_000_000);
 
 ### URL и HttpClient
 
+`java.net.URL` — это абстракция адреса в интернете, может представлять ресурсы по протоколам HTTP, HTTPS, FTP и т.д.
 
+Пример:
 
+```java
+import java.net.URL;
+
+public class URLExample {
+    public static void main(String[] args) throws Exception {
+        URL url1 = new URL("https://example.com");
+        URL url2 = new URL("https", "example.com", 443, "/path/resource");
+
+        System.out.println(url1.getProtocol()); // https
+        System.out.println(url1.getHost());     // example.com
+        System.out.println(url1.getPort());     // -1 (если порт не указан)
+        System.out.println(url1.getPath());     // /
+    }
+}
+```
+
+Минусы URL:
+- Нет удобных средств для POST-запросов, заголовков, таймаутов и асинхронного выполнения.
+- Только синхронный доступ.
+
+`java.net.http.HttpClient` — современный клиент для HTTP/HTTPS, поддерживает:
+- GET, POST и другие методы
+- Таймауты
+- Асинхронные запросы (CompletableFuture)
+- Настройку заголовков
+- Redirect
+- Работа с Body как String, Stream или File
+
+Пример:
+
+```java
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
+public class HttpClientExample {
+    public static void main(String[] args) throws Exception {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create("https://example.com"))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Status code: " + response.statusCode());
+        System.out.println("Body: " + response.body());
+    }
+}
+```
+
+Post запрос с телом:
+
+```java
+HttpRequest postRequest = HttpRequest.newBuilder()
+        .uri(URI.create("https://example.com/api"))
+        .POST(HttpRequest.BodyPublishers.ofString("{\"name\":\"John\"}"))
+        .header("Content-Type", "application/json")
+        .build();
+
+HttpResponse<String> postResponse = client.send(postRequest, HttpResponse.BodyHandlers.ofString());
+System.out.println(postResponse.body());
+```
