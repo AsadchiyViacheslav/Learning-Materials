@@ -6,6 +6,8 @@ Universal Scalability Law (Gunther)
 
 Доступ к разделяемому ресурсу (блокирующий и не блокирующий)
 
+synchronized
+
 Thread
 
 Потокобезопасность коллекции
@@ -25,3 +27,7 @@ Java Memory Model
 Порядок
 
 Простые правила happend before
+
+volatile
+
+singleton - Singleton(lazy) - Singleton(lazy thread-safe) - Singleton(double checked locking)
