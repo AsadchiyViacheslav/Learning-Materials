@@ -40,6 +40,8 @@ public class Main {
 | `Supplier<T>`       | `T get()`             | генерация значения (`() -> Math.random()`)    |
 | `UnaryOperator<T>`  | `T apply(T t)`        | функция `T -> T` (`x -> x*x`)                 |
 | `BinaryOperator<T>` | `T apply(T t1, T t2)` | объединение двух значений (`(a,b)->a+b`)      |
+| `Runnable` | `void run()` | запуск кода без аргументов и результата |
+
 
 
 ### Функциональные выражения в Java
