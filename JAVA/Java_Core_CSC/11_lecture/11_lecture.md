@@ -408,7 +408,7 @@ public class SingletonThreadSafe {
 
 ```java
 public class SingletonDCL {
-    private static volatiles SingletonDCL instance; // volatile важно!
+    private static volatile SingletonDCL instance; // volatile важно!
 
     private SingletonDCL() {}
 
