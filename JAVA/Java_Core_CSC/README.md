@@ -31,3 +31,4 @@
 
 - [Программирование на Java от Computer Science Center](https://compscicenter.ru/courses/java/nsk/2022-spring/)
 - [Записи лекций курса](https://www.youtube.com/playlist?list=PLlb7e2G7aSpTCB2OxGlezpgOXwq4xer7Z)
+- [Java SE от Metanit](https://metanit.com/java/tutorial/)
