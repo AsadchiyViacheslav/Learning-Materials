@@ -5,7 +5,7 @@
 
 ![Scheme of Java](https://i.pinimg.com/736x/27/5f/d7/275fd7ede464b00adeb64635658e9e31.jpg)
 
-**JVM (Java Virtual Machine)**
+#### JVM (Java Virtual Machine)
 
 Это виртуальная машина, которая исполняет байт-код Java.
 
@@ -23,85 +23,266 @@ JVM отвечает за:
 
 JVM бывает разных реализаций (HotSpot, OpenJ9, GraalVM и др.), но у всех общий интерфейс — спецификация JVM.
 
-2. JRE (Java Runtime Environment)
+#### JRE (Java Runtime Environment)
 
 Это среда выполнения Java.
 
 Состоит из:
 
-JVM,
+- JVM,
 
-библиотек Java Class Library (JCL),
+- библиотек Java Class Library (JCL),
 
-вспомогательных файлов (например, rt.jar в старых версиях).
+- вспомогательных файлов (например, rt.jar в старых версиях).
 
 То есть JRE нужен, чтобы запускать готовые Java-программы.
 
 В JRE нет компилятора javac и других девелоперских инструментов.
 
-3. JDK (Java Development Kit)
+#### JDK (Java Development Kit)
 
 Это набор для разработчика, в него входит:
 
-JRE (а значит и JVM + стандартные библиотеки),
+- JRE (а значит и JVM + стандартные библиотеки),
 
-инструменты для разработки (компилятор javac, отладчик jdb, утилиты jar, javadoc, jconsole и т. д.).
+- инструменты для разработки (компилятор javac, отладчик jdb, утилиты jar, javadoc, jconsole и т. д.).
 
 Если тебе надо писать код — нужен JDK.
 
 Если только запускать код — достаточно JRE.
 (хотя в современных версиях Oracle/OpenJDK JRE как отдельный пакет уже не выпускается, в JDK встроен runtime).
 
-4. Java Class Library (JCL)
+#### Java Class Library (JCL)
 
 Это стандартные библиотеки Java, которые предоставляют базовые API:
 
-коллекции (java.util),
+- коллекции (java.util),
 
-ввод/вывод (java.io, java.nio),
+- вывод (java.io, java.nio),
 
-работа с сетью (java.net),
+- работа с сетью (java.net),
 
-работа с многопоточностью (java.util.concurrent),
+- работа с многопоточностью (java.util.concurrent),
 
-и многое другое.
+- и многое другое.
 
 Фактически это вторая половина языка: без библиотек ты бы писал очень низкоуровневый код.
 
-5. Java Development Tools
+#### Java Development Tools
 
 Это утилиты, которые входят в JDK:
 
-javac — компилятор из .java в .class,
+- javac — компилятор из .java в .class,
 
-java — запуск программы,
+- java — запуск программы,
 
-jar — упаковка классов и ресурсов в .jar-архив,
+- jar — упаковка классов и ресурсов в .jar-архив,
 
-javadoc — генерация документации,
+- javadoc — генерация документации,
 
-jdb — отладчик,
+- jdb — отладчик,
 
-плюс куча вспомогательных.
+- плюс куча вспомогательных.
+
+---
+
+#### Жизненный цикл Java-кода
+
+1. Пишем исходный код в .java
+2. Компиляция (javac) .java -> .class
+3. Загрузка в JVM
+   - JVM запускает загрузчик классов (Class Loader), который подгружает Hello.class и все нужные зависимости.
+4. Верификация байт-кода
+   - JVM проверяет безопасность кода (нет ли попыток лезть за границы массива, нарушить типизацию и т. п.).
+5. Интерпретация / JIT-компиляция 
+   - Сначала байт-код интерпретируется построчно.
+   - Часто вызываемые методы JVM компилирует в машинный код через JIT (Just-In-Time), чтобы программа работала быстрее.
+6. Выполнение
+   - JVM управляет памятью, запускает сборщик мусора, обрабатывает исключения и т. д.
+7. Завершение работы
+   - JVM завершает процесс, освобождает ресурсы.
 
 
-
-
-
-
-
-
-
-.class -> Class loader subsystem(loading, linking, initialization) -> runtime data area (heap, method area, stack, pc register, native method stack) -> execution engine (interpreter, jit compiler, garbage collector)-> jni -> native method library
+### JVM
 
 ![JVM Architecture](https://avatars.dzeninfra.ru/get-zen_doc/9505890/pub_642424dd9b2074611901dd26_642428f02f2d5107b7ba9974/scale_1200)
-ClassLoader
 
-Верификация класса, Инициализация класса
+#### Class Loader Subsystem
 
-Пул констант
+Жизненный цикл: Loading → Linking → Initialization
 
-Сигнатуры полей, сигнатуры методов, Атрибуты класса, Поле, Инициализация полей, Метод, Код, Байткод, Инструкции
+**Loading (загрузка)**
 
-Garbage collection (Generational GC, Copying, Regionalized copying, Mark and sweep vs mark and compact, Parallel/concurrent GC, Java garbage collectors, TLAB аллокация
+- Находит байткод (файл, JAR, сеть, in-memory), читает .class, создаёт объект java.lang.Class.
+
+- Сам факт загрузки ещё НЕ исполняет статические блоки.
+
+**Linking (линковка)**
+
+- Verify — верификация байткода: корректность типов, границы стека, валидность переходов, StackMapTable. Цель — безопасность и отсутствие UB.
+
+- Prepare — выделяются структуры для статических полей, им присваиваются дефолтные значения (0/false/null), без вычисления инициализаторов.
+
+- Resolve — разрешение символических ссылок из constant pool в прямые (классы/поля/методы). Может выполняться лениво (при первом обращении).
+
+**Initialization (инициализация)**
+
+- Вызов скрытого метода <clinit> (статические инициализаторы + инициализация static полей с выражениями).
+
+- Гарантированно один раз на класс, до первого «активного использования» (new, getstatic, putstatic, invokestatic, рефлексия и т.п.).
+
+- Сначала инициализируется родитель, затем ребёнок. Для интерфейсов — нюанс: их суперинтерфейсы не обязаны инициализироваться сразу.
+
+#### Runtime Data Areas (области памяти во время выполнения)
+
+**Общие (на все потоки)**
+
+- Heap — все объектные инстансы и массивы.
+
+- Method Area (по спецификации) — метаданные классов, коды методов, constant pools.
+
+**На каждый поток**
+
+- Java Stack — стек кадров (frames). Каждый frame:
+
+  - Local Variables (ячейки для параметров и локалок),
+
+  - Operand Stack (машина стека для байткода),
+
+  - служебные ссылки на constant pool/метаданные.
+
+- PC Register — счётчик текущей инструкции байткода для потока (для native не определён).
+
+- Native Method Stack — стек для нативного кода (JNI). При проблемах — StackOverflowError/OutOfMemoryError.
+
+#### Execution Engine (как исполняется код)
+
+Интерпретатор
+
+JIT-компилятор(ы)
+
+Garbage Collector (GC)
+
+#### JNI (Java Native Interface)
+
+Зачем: вызвать нативный код (C/C++/ASM) из Java и наоборот.
+
+### .class
+
+#### Пул констант (Constant Pool)
+
+Каждый .class содержит constant pool — это таблица, где хранятся:
+
+- литералы (числа, строки, float, double и т. д.),
+
+- ссылки на классы, имена методов и полей,
+
+- сигнатуры типов,
+
+- ссылки на атрибуты.
+
+Байткод не хранит строковые имена напрямую, он ссылается на индекс в пуле констант.
+Например, getstatic #5 — это "взять статическое поле, ссылка на которое в constant pool под индексом 5".
+
+Типы записей в пуле (Constant Pool Tags):
+
+- CONSTANT_Class — ссылка на класс/интерфейс,
+
+- CONSTANT_Fieldref, CONSTANT_Methodref — поля/методы,
+
+- CONSTANT_String — строковый литерал,
+
+- CONSTANT_Integer, CONSTANT_Float, CONSTANT_Long, CONSTANT_Double — числа,
+
+- CONSTANT_NameAndType — имя + тип,
+
+- CONSTANT_Utf8 — строка (имена, сигнатуры),
+
+- и др.
+
+#### Сигнатуры полей и методов
+
+Формат указывается в дескрипторе (descriptor). Примеры:
+
+- I → int
+
+- J → long
+
+- F → float
+
+- D → double
+
+- Z → boolean
+
+- C → char
+
+- B → byte
+
+- S → short
+
+- Ljava/lang/String; → String
+
+- [I → int[]
+
+- [[Ljava/lang/String; → String[][]
+
+У методов включает аргументы и возвращаемое значение:
+
+- ()V — метод без параметров, возвращает void.
+
+- (I)I — принимает int, возвращает int.
+
+- (Ljava/lang/String;I)Z — принимает String и int, возвращает boolean.
+
+- ([I)V — принимает int[], возвращает void.
+
+- (Ljava/util/List;)Ljava/lang/Object; — принимает List, возвращает Object.
+
+
+#### Атрибуты класса
+
+У каждого .class могут быть атрибуты, которые несут метаинформацию.
+Примеры:
+
+- Code (байткод метода),
+
+- LineNumberTable (сопоставление строк в исходнике и байткода, нужно для дебага),
+
+- LocalVariableTable (имена переменных для отладки),
+
+- Exceptions (какие исключения выбрасывает метод),
+
+- SourceFile (имя исходника),
+
+- Signature (дженерики),
+
+- RuntimeVisibleAnnotations (аннотации).
+
+#### Инициализация полей
+
+Поля объекта по умолчанию получают нулевые значения при создании объекта (0/false/null).
+
+Константы static final примитивов/строк инициализируются через атрибут ConstantValue прямо в .class.
+
+Остальные поля инициализируются в <clinit> (для статических) или <init> (для экземпляров).
+
+#### Атрибут Code
+
+Атрибут Code у метода включает:
+
+- max_stack — глубина стека операндов, нужная этому методу,
+
+- max_locals — сколько локальных переменных нужно,
+
+- code[] — массив байткода,
+
+- exception_table — таблица try-catch,
+
+- attributes[] — вложенные атрибуты (например, LineNumberTable).
+
+###
+
+
+
+
 
