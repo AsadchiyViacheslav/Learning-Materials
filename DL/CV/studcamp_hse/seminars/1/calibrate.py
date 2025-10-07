@@ -12,8 +12,8 @@ detector = cv.aruco.CharucoDetector(board)
 
 obj_points = []
 img_points = []
-for path in os.listdir("images"):
-    img = cv.imread(f"images\\{path}")
+for path in os.listdir("1\\images"):
+    img = cv.imread(f"1\\images\\{path}")
 
     corners, charucoIds, _, _ = detector.detectBoard(img)
 

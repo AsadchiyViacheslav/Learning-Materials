@@ -6,7 +6,7 @@ aruco_dict = cv.aruco.getPredefinedDictionary(cv.aruco.DICT_6X6_100)
 board = cv.aruco.CharucoBoard((5, 7), squareLength=0.035, markerLength=0.023, dictionary=aruco_dict)
 detector = cv.aruco.CharucoDetector(board)
 
-img = cv.imread("images\\2.jpg")
+img = cv.imread("1\\images\\2.jpg")
 
 corners, charucoIds, markerCorners, markerIds = detector.detectBoard(img)
 cv.aruco.drawDetectedMarkers(img, markerCorners)
