@@ -13,9 +13,11 @@
 | [data_split.ipynb](./data_split.ipynb) | Разделение данных для разметки |
 | [load_data.ipynb](./load_data.ipynb) | Загрузка датасета в Yandex Cloud |
 | [MobileNetV3_scooter_classification.ipynb](./MobileNetV3_scooter_classification.ipynb) | Обучение small и large MobileNetV3 для определения находится ли самокат на фото |
+| [MobileNetV3_parking_classification.ipynb](./MobileNetV3_parking_classification.ipynb) | Обучение small и large MobileNetV3 для определения нахождения самоката на парковке |
 | [EfficientNetB1_scooter_classification.ipynb](./EfficientNetB1_scooter_classification.ipynb) | Обучение EfficientNetV2 B1 для определения находится ли самокат на фото |
 | [model_convert.ipynb](./model_convert.ipynb) | Конвертация модели из .pth в .onnx |
 | [model_check.ipynb](./model_check.ipynb) | Оценка модели в формате .onnx |
+| [Quantization.ipynb](./Quantization.ipynb) | Квантанизация моделей из fp32 в int8 |
 | [task.docx](./task.docx) | Описание и задача проекта |
 | [data](./data/) | Папка с разметкой |
 
