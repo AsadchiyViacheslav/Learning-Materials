@@ -8,7 +8,7 @@
 
 **Иерархия исключений Java**
 
-![Иерархия изображние]([https://clipof.ru/wp-content/uploads/f/8/f/f8f67c45a9ca61e25f25d2aa26f0ca47.jpeg](https://avatars.mds.yandex.net/i?id=1be2c0783b1baad2926ac715d744042e_l-10780278-images-thumbs&n=13))
+![Иерархия изображние](https://slavshkola.ru/blog/wp-content/uploads/kak-sozdat-svoe-isklyuchenie-java-yl1nj0ho.webp)
 
 **Конструирование исключений**
 
